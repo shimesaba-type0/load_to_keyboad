@@ -1,0 +1,34 @@
+#include "Keyboard.h"
+
+const int inputPin = 4;
+const int ledPin = 13;
+bool currentState = LOW;
+bool beforeState = LOW;
+
+// the setup function runs once when you press reset or power the board
+void setup() {
+  // initialize digital pin LED_BUILTIN as an output.
+  pinMode(inputPin, INPUT);
+  pinMode(ledPin, OUTPUT);
+
+  Serial.begin(9600);
+  Keyboard.begin();
+}
+
+// the loop function runs over and over again forever
+void loop() {
+  currentState = digitalRead(inputPin);
+
+  if ( currentState != beforeState ){
+    if ( currentState == HIGH ){
+      digitalWrite(ledPin, HIGH);
+      Serial.println("Push!");
+      Keyboard.press( 0x61 );
+    }else{
+      digitalWrite(ledPin, LOW);
+      Serial.println("Release!");
+      Keyboard.release( 0x61 );
+    }
+    beforeState = currentState;
+  }
+}
