@@ -29,11 +29,11 @@ void loop() {
       Serial.print("key");
       Serial.print(i);
       if ( currentState[i] == HIGH ){
-        Serial.println("push");
-        keyboard.press( keyMap[i] );
+        Serial.println(" push");
+        Keyboard.press( keyMap[i] );
       } else {
         Serial.println(" Release");
-        keyboad.release( keyMap[i] );
+        Keyboard.release( keyMap[i] );
       }
       beforeState[i] = currentState[i];
     }
